@@ -1,5 +1,6 @@
-[gd_scene load_steps=15 format=3 uid="uid://d21f4g8oo560p"]
+[gd_scene load_steps=17 format=3 uid="uid://d21f4g8oo560p"]
 
+[ext_resource type="Script" path="res://Scripts/player.gd" id="1_1o5iq"]
 [ext_resource type="Texture2D" uid="uid://dys87gulg1rjp" path="res://Assets/main_char.png" id="1_gv5sn"]
 
 [sub_resource type="Animation" id="Animation_bioic"]
@@ -103,7 +104,12 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_or8rp"]
+radius = 2.0
+height = 8.0
+
 [node name="Player" type="CharacterBody2D"]
+script = ExtResource("1_1o5iq")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -113,5 +119,9 @@ libraries = {
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -8)
 sprite_frames = SubResource("SpriteFrames_e7lrk")
-animation = &"Idle"
-autoplay = "Idle"
+animation = &"Run"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -1)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_or8rp")

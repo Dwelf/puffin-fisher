@@ -1,8 +1,13 @@
-[gd_scene load_steps=2 format=3 uid="uid://bpelb032546rt"]
+[gd_scene load_steps=3 format=3 uid="uid://bpelb032546rt"]
 
 [ext_resource type="PackedScene" uid="uid://d21f4g8oo560p" path="res://Scenes/player.tscn" id="1_bpo2r"]
+[ext_resource type="Texture2D" uid="uid://bgjaticqcctia" path="res://icon.svg" id="2_86uyb"]
 
 [node name="testWorld" type="Node2D"]
+
+[node name="Icon" type="Sprite2D" parent="."]
+position = Vector2(91, -12)
+texture = ExtResource("2_86uyb")
 
 [node name="Player" parent="." instance=ExtResource("1_bpo2r")]
 
