@@ -35,10 +35,6 @@ region = Rect2(96, 0, 48, 48)
 atlas = ExtResource("1_gv5sn")
 region = Rect2(144, 0, 48, 48)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_etqch"]
-atlas = ExtResource("1_gv5sn")
-region = Rect2(192, 0, 48, 48)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_xnoab"]
 atlas = ExtResource("1_gv5sn")
 region = Rect2(240, 0, 48, 48)
@@ -50,6 +46,10 @@ region = Rect2(288, 0, 48, 48)
 [sub_resource type="AtlasTexture" id="AtlasTexture_6xc0q"]
 atlas = ExtResource("1_gv5sn")
 region = Rect2(336, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_etqch"]
+atlas = ExtResource("1_gv5sn")
+region = Rect2(192, 0, 48, 48)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_e7lrk"]
 animations = [{
@@ -88,9 +88,6 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_etqch")
-}, {
-"duration": 1.0,
 "texture": SubResource("AtlasTexture_xnoab")
 }, {
 "duration": 1.0,
@@ -98,6 +95,9 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_6xc0q")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_etqch")
 }],
 "loop": true,
 "name": &"Run",
@@ -119,7 +119,7 @@ libraries = {
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -8)
 sprite_frames = SubResource("SpriteFrames_e7lrk")
-animation = &"Fishing"
+animation = &"Run"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -1)
