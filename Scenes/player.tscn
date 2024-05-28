@@ -1,7 +1,8 @@
-[gd_scene load_steps=17 format=3 uid="uid://d21f4g8oo560p"]
+[gd_scene load_steps=18 format=3 uid="uid://d21f4g8oo560p"]
 
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_1o5iq"]
 [ext_resource type="Texture2D" uid="uid://dys87gulg1rjp" path="res://Assets/main_char.png" id="1_gv5sn"]
+[ext_resource type="PackedScene" uid="uid://bftrx3cuhulnl" path="res://Scenes/fishingUI.tscn" id="3_kafbe"]
 
 [sub_resource type="Animation" id="Animation_bioic"]
 resource_name = "Idle"
@@ -119,7 +120,11 @@ libraries = {
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -8)
 sprite_frames = SubResource("SpriteFrames_e7lrk")
-animation = &"Run"
+animation = &"Casting"
+
+[node name="FishingLine" type="Line2D" parent="AnimatedSprite2D"]
+position = Vector2(0, 8)
+width = 2.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -1)
@@ -128,3 +133,8 @@ shape = SubResource("CapsuleShape2D_or8rp")
 
 [node name="Timer" type="Timer" parent="."]
 one_shot = true
+
+[node name="Power" parent="." instance=ExtResource("3_kafbe")]
+visible = false
+offset_top = -29.0
+offset_bottom = -21.0
