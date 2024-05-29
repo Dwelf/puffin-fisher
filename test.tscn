@@ -8,7 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://dkvedmu4uh0b6" path="res://Assets/Cliffs.png" id="6_fbhsm"]
 [ext_resource type="PackedScene" uid="uid://dhmungkuyi12c" path="res://Scenes/house.tscn" id="8_nnyru"]
 [ext_resource type="Script" path="res://Scripts/day_night_cycle.gd" id="8_rkj7q"]
-[ext_resource type="Texture2D" uid="uid://dq0cjle6rsvdf" path="res://Assets/daynightcycle-gradient-texture.tres" id="9_2nduj"]
+[ext_resource type="Texture2D" uid="uid://53ud3he8enlj" path="res://Assets/daynightcycle-gradient-texture.tres" id="9_2nduj"]
 
 [sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_5dgyw"]
 scenes/1/scene = ExtResource("4_x5l8u")
