@@ -6,11 +6,15 @@ extends CharacterBody2D
 @onready var animated_sprite = $AnimatedSprite2D
 @onready var cast_timer = $Timer
 @onready var power_bar = $Power
-@onready var fishingLine = $AnimatedSprite2D/FishingLine
+@onready var fishingLine = $AnimatedSprite2D/FishingPole/FishingLine
+@onready var castingPole = $AnimatedSprite2D/CastingPole
+@onready var fishingPole = $AnimatedSprite2D/FishingPole
 
 var casting = false
-var fishing = false
+var released = false
+var waiting = false
 var input_direction
+var instance
 
 func _ready():
 	animated_sprite.play("Idle")
@@ -27,51 +31,62 @@ func _physics_process(_delta):
 	
 	
 	# CASTING LOGIC
-#	var cast = Input.get_action_strength("cast")
-	
-	if !fishing and Input.is_action_just_pressed("cast"):
-		print("Casting")
+	if !released and Input.is_action_just_pressed("cast"):  #start cast power animation if not fishing yet and they pressed cast
 		casting = true
 		power_bar.visible = true
 		power_bar.cast()
-		
-	
+	elif waiting and Input.is_action_just_pressed("cast"): #stop fishing if cast pressed while waiting for fish to bite
+		waiting = false
+		released = false
+		power_bar.reset_cast()
+		remove_child(instance)
 	
 
-	
-	if (casting and Input.is_action_just_released("cast")) or power_bar.finished:
+	if (casting and Input.is_action_just_released("cast")) or power_bar.finished: #if power bar state ended:
 		casting = false
 		cast_timer.start()
 		var power = power_bar.release_cast()
 		
-		if !power_bar.finished:
-			fishing = true
-		else:
+		
+		if !power_bar.finished: #if the user set a cast strength that isnt 0 then throw the bobber
+			released = true
+			var scene = load("res://Scenes/bobber.tscn")
+			instance = scene.instantiate()
+			if animated_sprite.scale.x == -1:
+				instance.position = Vector2(-20,-20)
+			else:
+				instance.position = Vector2(+20,-20)
+				
+			add_child(instance)
+			get_node("Bobber").throw(power,velocity/move_speed)
+		else:  #else reset the power bar state
 			power_bar.visible = false
 			power_bar.reset_cast()
 		
-	if !casting and cast_timer.is_stopped():
-		fishing = false
-		power_bar.visible = false
-		power_bar.reset_cast()
+	
+	if instance in get_children():  #draw fishing line if the bobber is on screen
 		
-#	if cast > 0 and cast_timer.is_stopped() and !casting and !fishing:
-#		casting = true
-#		cast_timer.start()     #when pressing cast, the casting animation plays for 1 second before moving to the fishing animation
-#	elif cast > 0 and fishing:
-#		fishing = false
-#		cast_timer.start()     #when coming out of fishing animation, you cannot cas
-#
-#	if casting and cast_timer.is_stopped():
-#		casting = false
-#		fishing = true
+		fishingLine.points = PackedVector2Array([ Vector2(instance.position[0]*animated_sprite.scale.x,instance.position[1]), Vector2(fishingPole.position[0]+5, fishingPole.position[1]-14)])
+	
+	
+	if !casting and cast_timer.is_stopped():  #if the bobber has frozen in place, check if it is in water or not
+		if instance in get_children():
+			if !instance.in_water:
+				released = false
+				remove_child(instance)
+			else:
+				waiting = true
+			power_bar.visible = false
+			power_bar.reset_cast()
+			
+			
 		
 	update_animation_parameters(input_direction)
 	
 	if input_direction != Vector2.ZERO:
 		velocity = input_direction.normalized() * move_speed
 	
-	if !casting and !fishing:  #cannot move while fishing or casting
+	if !casting and !released:  #cannot move while fishing or casting
 		if input_direction != Vector2.ZERO:
 			move_and_slide()
 	
@@ -81,7 +96,7 @@ func _physics_process(_delta):
 
 func update_animation_parameters(move_input : Vector2):
 	# cannot change direction while fishing or casting
-	if !casting and !fishing:
+	if !casting and !released:
 		
 		#flips sprite left or right based on input direction
 		if(move_input[0] < 0):
@@ -92,7 +107,10 @@ func update_animation_parameters(move_input : Vector2):
 
 # picks the animation state based on certain circumstances
 func pick_new_state():
-	if !fishing and !casting:
+	
+	castingPole.visible = false
+	fishingPole.visible = false
+	if !released and !casting:
 		if(input_direction != Vector2.ZERO):
 			animated_sprite.play("Run")
 
@@ -100,7 +118,9 @@ func pick_new_state():
 			animated_sprite.play("Idle")
 	elif casting:
 		animated_sprite.play("Casting")
-	elif fishing:
+		castingPole.visible = true
+	elif released:
 		animated_sprite.play("Fishing")
+		fishingPole.visible = true
 	
 
