@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://cgikeq0l85psv"]
+[gd_scene load_steps=5 format=3 uid="uid://cgikeq0l85psv"]
 
 [ext_resource type="Texture2D" uid="uid://bpy0jt6ra0oh5" path="res://Assets/water.png" id="1_lkve2"]
 
@@ -17,6 +17,14 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8slve"]
+size = Vector2(16, 16)
+
 [node name="Still Water" type="AnimatedSprite2D"]
 sprite_frames = SubResource("SpriteFrames_raq4p")
 autoplay = "default"
+
+[node name="StillWater" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StillWater"]
+shape = SubResource("RectangleShape2D_8slve")

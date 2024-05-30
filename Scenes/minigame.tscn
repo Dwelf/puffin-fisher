@@ -1,0 +1,86 @@
+[gd_scene load_steps=8 format=3 uid="uid://dgqh4an8tc5tj"]
+
+[ext_resource type="Script" path="res://Scripts/minigame.gd" id="1_a05ug"]
+[ext_resource type="Texture2D" uid="uid://bgjaticqcctia" path="res://icon.svg" id="2_55r28"]
+[ext_resource type="Texture2D" uid="uid://cxe3f6ejoix7w" path="res://Assets/fish1.png" id="3_uru0g"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_acru3"]
+size = Vector2(9, 265)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1dqry"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_m6pcb"]
+size = Vector2(26, 20)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_4fwm3"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_a05ug")
+
+[node name="FishBar" type="StaticBody2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="FishBar"]
+modulate = Color(0, 0, 0, 1)
+rotation = -1.5708
+scale = Vector2(1.96875, 0.21875)
+texture = ExtResource("2_55r28")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FishBar"]
+position = Vector2(-17.5, -5.5)
+shape = SubResource("RectangleShape2D_acru3")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="FishBar"]
+position = Vector2(18, -5)
+shape = SubResource("RectangleShape2D_acru3")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="FishBar"]
+position = Vector2(0, -136)
+shape = SubResource("RectangleShape2D_1dqry")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="FishBar"]
+position = Vector2(0, 136)
+shape = SubResource("RectangleShape2D_1dqry")
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+layout_mode = 0
+offset_left = 24.0
+offset_top = 126.0
+offset_right = 277.0
+offset_bottom = 138.0
+rotation = 4.71239
+max_value = 1000.0
+value = 300.0
+show_percentage = false
+
+[node name="ReelBar" type="RigidBody2D" parent="."]
+gravity_scale = 0.4
+
+[node name="Sprite2D" type="Sprite2D" parent="ReelBar"]
+position = Vector2(0.500001, -0.5)
+scale = Vector2(0.210938, 0.164063)
+texture = ExtResource("2_55r28")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ReelBar"]
+shape = SubResource("RectangleShape2D_m6pcb")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="Fish" type="Area2D" parent="."]
+
+[node name="TextureRect" type="TextureRect" parent="Fish"]
+offset_left = -8.0
+offset_top = -20.0
+offset_right = 9.0
+offset_bottom = -3.0
+texture = ExtResource("3_uru0g")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Fish"]
+position = Vector2(1, -13)
+shape = SubResource("CircleShape2D_4fwm3")
+
+[connection signal="body_entered" from="Fish" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Fish" to="." method="_on_area_2d_body_exited"]
