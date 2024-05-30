@@ -1,7 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://ddt3j5vrfh448"]
+[gd_scene load_steps=5 format=3 uid="uid://c5hw6hqqo7vl1"]
 
 [ext_resource type="Script" path="res://Scripts/bobber.gd" id="1_ohths"]
-[ext_resource type="Texture2D" uid="uid://bgjaticqcctia" path="res://icon.svg" id="2_qjkb8"]
+[ext_resource type="Texture2D" uid="uid://jajt2jp7r7qy" path="res://Assets/bobber.png" id="2_e6txy"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_okh5p"]
 radius = 4.0
@@ -15,7 +15,7 @@ script = ExtResource("1_ohths")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.078125, 0.078125)
-texture = ExtResource("2_qjkb8")
+texture = ExtResource("2_e6txy")
 
 [node name="CollisionboxForError" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_okh5p")

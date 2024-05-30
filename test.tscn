@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://bpelb032546rt"]
+[gd_scene load_steps=28 format=3 uid="uid://bpelb032546rt"]
 
 [ext_resource type="PackedScene" uid="uid://d21f4g8oo560p" path="res://Scenes/player.tscn" id="1_bpo2r"]
 [ext_resource type="Texture2D" uid="uid://j5x4iwfrr7dt" path="res://Assets/grass background.png" id="3_k8w8k"]
@@ -9,6 +9,10 @@
 [ext_resource type="PackedScene" uid="uid://dhmungkuyi12c" path="res://Scenes/house.tscn" id="8_nnyru"]
 [ext_resource type="Script" path="res://Scripts/day_night_cycle.gd" id="8_rkj7q"]
 [ext_resource type="Texture2D" uid="uid://53ud3he8enlj" path="res://Assets/daynightcycle-gradient-texture.tres" id="9_2nduj"]
+[ext_resource type="Texture2D" uid="uid://37v5kq3iwjqm" path="res://Assets/foliage1.png" id="10_5f5wp"]
+[ext_resource type="Texture2D" uid="uid://dlynxo8mco0oe" path="res://Assets/foliage2.png" id="11_cx3eo"]
+[ext_resource type="Texture2D" uid="uid://dchlo3oedcfup" path="res://Assets/foliage3.png" id="12_c3t1g"]
+[ext_resource type="PackedScene" uid="uid://cmuaqoa0178gy" path="res://Scenes/rock.tscn" id="13_ow2u7"]
 
 [sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_5dgyw"]
 scenes/1/scene = ExtResource("4_x5l8u")
@@ -230,6 +234,29 @@ texture = ExtResource("6_fbhsm")
 physics_layer_0/collision_layer = 1
 sources/4 = SubResource("TileSetAtlasSource_dagaw")
 
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_2jm7n"]
+texture = ExtResource("10_5f5wp")
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_fqysi"]
+texture = ExtResource("11_cx3eo")
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_iuolr"]
+texture = ExtResource("12_c3t1g")
+0:0/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_gy75d"]
+sources/0 = SubResource("TileSetAtlasSource_2jm7n")
+sources/1 = SubResource("TileSetAtlasSource_fqysi")
+sources/2 = SubResource("TileSetAtlasSource_iuolr")
+
+[sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_0obgy"]
+scenes/1/scene = ExtResource("13_ow2u7")
+
+[sub_resource type="TileSet" id="TileSet_q2emx"]
+sources/0 = SubResource("TileSetScenesCollectionSource_0obgy")
+
 [node name="testWorld" type="Node2D"]
 y_sort_enabled = true
 
@@ -268,3 +295,14 @@ layer_0/tile_data = PackedInt32Array(196604, 65540, 2, 196605, 65540, 2, 196606,
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 script = ExtResource("8_rkj7q")
 gradient = ExtResource("9_2nduj")
+
+[node name="foliage" type="TileMap" parent="."]
+z_index = 4
+tile_set = SubResource("TileSet_gy75d")
+format = 2
+layer_0/tile_data = PackedInt32Array(131061, 0, 0, -4, 0, 0, -131086, 0, 0, -262142, 0, 0, -262141, 0, 0, -393211, 0, 0, -393222, 0, 0, -393224, 0, 0, -262156, 0, 0, -65532, 2, 0, 196601, 2, 0, -65547, 2, 0, -15, 2, 0, -262145, 2, 0, -524296, 2, 0, -196607, 1, 0, -131071, 1, 0, -131070, 1, 0, -196606, 1, 0, -131072, 1, 0, 131065, 1, 0, 131064, 1, 0, -12, 1, 0, -131087, 1, 0, -65551, 1, 0, -589831, 1, 0, -589832, 1, 0, -393213, 1, 0)
+
+[node name="rocks" type="TileMap" parent="."]
+tile_set = SubResource("TileSet_q2emx")
+format = 2
+layer_0/tile_data = PackedInt32Array(393217, 0, 65536, 196616, 0, 65536, -196594, 0, 65536, -524280, 0, 65536, -655363, 0, 65536, -917498, 0, 65536, -524309, 0, 65536, 327658, 0, 65536, 327667, 0, 65536, 131057, 0, 65536, -131089, 0, 65536, 786419, 0, 65536)
