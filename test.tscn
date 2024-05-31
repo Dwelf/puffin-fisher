@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://bpelb032546rt"]
+[gd_scene load_steps=30 format=3 uid="uid://bpelb032546rt"]
 
 [ext_resource type="PackedScene" uid="uid://d21f4g8oo560p" path="res://Scenes/player.tscn" id="1_bpo2r"]
 [ext_resource type="Texture2D" uid="uid://j5x4iwfrr7dt" path="res://Assets/grass background.png" id="3_k8w8k"]
@@ -13,6 +13,8 @@
 [ext_resource type="Texture2D" uid="uid://dlynxo8mco0oe" path="res://Assets/foliage2.png" id="11_cx3eo"]
 [ext_resource type="Texture2D" uid="uid://dchlo3oedcfup" path="res://Assets/foliage3.png" id="12_c3t1g"]
 [ext_resource type="PackedScene" uid="uid://cmuaqoa0178gy" path="res://Scenes/rock.tscn" id="13_ow2u7"]
+[ext_resource type="AudioStream" uid="uid://ypgl8tmsxsu3" path="res://Assets/beach_song.ogg" id="14_vvoff"]
+[ext_resource type="Script" path="res://Scripts/WorldStats.gd" id="15_m8pho"]
 
 [sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_5dgyw"]
 scenes/1/scene = ExtResource("4_x5l8u")
@@ -306,3 +308,20 @@ layer_0/tile_data = PackedInt32Array(131061, 0, 0, -4, 0, 0, -131086, 0, 0, -262
 tile_set = SubResource("TileSet_q2emx")
 format = 2
 layer_0/tile_data = PackedInt32Array(393217, 0, 65536, 196616, 0, 65536, -196594, 0, 65536, -524280, 0, 65536, -655363, 0, 65536, -917498, 0, 65536, -524309, 0, 65536, 327658, 0, 65536, 327667, 0, 65536, 131057, 0, 65536, -131089, 0, 65536, 786419, 0, 65536)
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("14_vvoff")
+autoplay = true
+
+[node name="waters" type="Node2D" parent="."]
+
+[node name="Test Water" type="Area2D" parent="waters"]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="waters/Test Water"]
+polygon = PackedVector2Array(145, -36, 145, -64, 112, -64, 112, -112, 18, -113, 17, -96, 1, -96, 0, -80, -48, -81, -47, -114, -63, -114, -63, -132, -79, -132, -79, -176, -144, -176, -144, -129, -208, -129, -208, -65, -257, -65, -257, 16, -193, 16, -192, 81, -63, 80, -63, 47, 64, 47, 65, 31, 82, 31, 82, 15, 98, 16, 98, -32, 150, -32, 367, -30, 370, 212, -349, 204, -496, 203, -495, -116, -491, -268, -490, -365, 168, -365, 463, -369, 458, -40, 372, -31)
+
+[node name="WorldStats" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("15_m8pho")

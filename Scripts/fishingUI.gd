@@ -17,7 +17,6 @@ func reset_cast():
 	value = 0
 	
 func _process(_delta):
-	
 	if start:
 		value += increment
 		if value == max_value:

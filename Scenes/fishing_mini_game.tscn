@@ -1,0 +1,57 @@
+[gd_scene load_steps=7 format=3 uid="uid://cafq8osa6b6kl"]
+
+[ext_resource type="Texture2D" uid="uid://bs7mwjad38hd8" path="res://Assets/fishing minigame Field.png" id="2_t60pl"]
+[ext_resource type="Texture2D" uid="uid://cuybkrapvps2v" path="res://Assets/fishing minigame bobber.png" id="3_uj0ew"]
+
+[sub_resource type="GDScript" id="GDScript_okpuo"]
+script/source = "extends Node2D
+
+@onready var bobber = $Bobber
+
+var gravity = 5
+var force = 10
+
+func _physics_process(_delta):
+	if Input.is_action_pressed(\"up\"):
+		bobber.velocity[1] -= force
+	
+	bobber.velocity[1] += gravity
+	
+	bobber.move_and_slide()
+"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hcy72"]
+size = Vector2(12, 3)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_a7vqd"]
+size = Vector2(12, 3)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_viacu"]
+size = Vector2(8, 16)
+
+[node name="Fishing Game" type="Node2D"]
+script = SubResource("GDScript_okpuo")
+
+[node name="Border" type="StaticBody2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="Border"]
+texture = ExtResource("2_t60pl")
+
+[node name="Floor" type="CollisionShape2D" parent="Border"]
+position = Vector2(0, 21.5)
+shape = SubResource("RectangleShape2D_hcy72")
+
+[node name="Ceiling" type="CollisionShape2D" parent="Border"]
+position = Vector2(0, -21.5)
+shape = SubResource("RectangleShape2D_a7vqd")
+
+[node name="Bobber" type="CharacterBody2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="Bobber"]
+texture = ExtResource("3_uj0ew")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Bobber"]
+shape = SubResource("RectangleShape2D_viacu")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(5, 5)

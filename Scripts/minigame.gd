@@ -29,8 +29,6 @@ func _process(_delta):
 		escaped = true
 		
 
-
-
 func _on_area_2d_body_entered(body):
 	capturing = true
 

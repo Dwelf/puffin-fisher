@@ -15,12 +15,14 @@ var released = false
 var waiting = false
 var input_direction
 var instance
+var bobber_dir
+
+var captured_fish = []
 
 func _ready():
 	animated_sprite.play("Idle")
 	
 	
-
 func _physics_process(_delta):
 	
 	# get user input for movement
@@ -28,7 +30,6 @@ func _physics_process(_delta):
 		Input.get_action_strength("right") - Input.get_action_strength("left"),
 		Input.get_action_strength("down") - Input.get_action_strength("up")
 	)
-	
 	
 	# CASTING LOGIC
 	if !released and Input.is_action_just_pressed("cast"):  #start cast power animation if not fishing yet and they pressed cast
@@ -58,14 +59,15 @@ func _physics_process(_delta):
 				instance.position = Vector2(+20,-20)
 				
 			add_child(instance)
-			get_node("Bobber").throw(power,velocity/move_speed)
+			bobber_dir = (get_global_mouse_position() - global_position).normalized()
+			#get_node("Bobber").throw(power,velocity/move_speed)
+			get_node("Bobber").throw(power, bobber_dir)
 		else:  #else reset the power bar state
 			power_bar.visible = false
 			power_bar.reset_cast()
 		
 	
 	if instance in get_children():  #draw fishing line if the bobber is on screen
-		
 		fishingLine.points = PackedVector2Array([ Vector2(instance.position[0]*animated_sprite.scale.x,instance.position[1]), Vector2(fishingPole.position[0]+5, fishingPole.position[1]-14)])
 	
 	
@@ -78,6 +80,8 @@ func _physics_process(_delta):
 				waiting = true
 			power_bar.visible = false
 			power_bar.reset_cast()
+	
+	
 			
 			
 		
@@ -107,7 +111,6 @@ func update_animation_parameters(move_input : Vector2):
 
 # picks the animation state based on certain circumstances
 func pick_new_state():
-	
 	castingPole.visible = false
 	fishingPole.visible = false
 	if !released and !casting:

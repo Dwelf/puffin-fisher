@@ -1,8 +1,9 @@
-[gd_scene load_steps=2 format=3 uid="uid://bftrx3cuhulnl"]
+[gd_scene load_steps=2 format=3 uid="uid://clmvgf6kfqrqg"]
 
 [ext_resource type="Script" path="res://Scripts/fishingUI.gd" id="1_8tkcl"]
 
 [node name="Power" type="ProgressBar"]
+z_index = 280
 offset_left = -20.0
 offset_top = -4.0
 offset_right = 20.0
