@@ -322,6 +322,6 @@ collision_mask = 2
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="waters/Test Water"]
 polygon = PackedVector2Array(145, -36, 145, -64, 112, -64, 112, -112, 18, -113, 17, -96, 1, -96, 0, -80, -48, -81, -47, -114, -63, -114, -63, -132, -79, -132, -79, -176, -144, -176, -144, -129, -208, -129, -208, -65, -257, -65, -257, 16, -193, 16, -192, 81, -63, 80, -63, 47, 64, 47, 65, 31, 82, 31, 82, 15, 98, 16, 98, -32, 150, -32, 367, -30, 370, 212, -349, 204, -496, 203, -495, -116, -491, -268, -490, -365, 168, -365, 463, -369, 458, -40, 372, -31)
 
-[node name="WorldStats" type="Node" parent="."]
+[node name="GameMaster" type="Node" parent="."]
 unique_name_in_owner = true
 script = ExtResource("15_m8pho")

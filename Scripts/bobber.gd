@@ -37,6 +37,7 @@ func _process(_delta):
 			minigame_loaded = true
 			var scene = load("res://Scenes/minigame.tscn")
 			instance = scene.instantiate()
+			add_child(instance)
 			print('minigame loaded')
 		freeze = FREEZE_MODE_KINEMATIC
 		
