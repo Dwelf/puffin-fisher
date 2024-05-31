@@ -2,7 +2,6 @@ extends Control
 
 @onready var reelBar = $ReelBar
 @onready var progress = $ProgressBar
-@onready var fish = $Fish/TextureRect
 
 var capturing = false
 var caught = false
@@ -19,6 +18,8 @@ func _process(_delta):
 	print(global_position)
 	if Input.is_action_pressed("up"):
 		reelBar.apply_central_force(Vector2(0,-300))
+	elif reelBar.linear_velocity == Vector2.ZERO:
+		reelBar.apply_central_force(Vector2(0,300))
 	
 	if capturing:
 		progress.value += 4
