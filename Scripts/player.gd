@@ -9,6 +9,7 @@ extends CharacterBody2D
 @onready var fishingLine = $AnimatedSprite2D/FishingPole/FishingLine
 @onready var castingPole = $AnimatedSprite2D/CastingPole
 @onready var fishingPole = $AnimatedSprite2D/FishingPole
+@onready var light = $PointLight2D
 
 var casting = false
 var released = false
@@ -24,7 +25,10 @@ func _ready():
 	
 	
 func _physics_process(_delta):
+	light.color.a = max(0.0,1-DayNightCycle.value*2)
 	
+
+		
 	# get user input for movement
 	input_direction = Vector2(
 		Input.get_action_strength("right") - Input.get_action_strength("left"),
