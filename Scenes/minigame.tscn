@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://du45t574cwbrx"]
+[gd_scene load_steps=10 format=3 uid="uid://du45t574cwbrx"]
 
 [ext_resource type="Script" path="res://Scripts/minigame.gd" id="1_a05ug"]
 [ext_resource type="Texture2D" uid="uid://bs7mwjad38hd8" path="res://Assets/fishing minigame Field.png" id="2_hspvh"]
@@ -15,6 +15,9 @@ size = Vector2(8, 10)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_4fwm3"]
 radius = 4.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6xl0e"]
+size = Vector2(9, 8)
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -74,14 +77,23 @@ texture = ExtResource("3_fgsku")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
-[node name="Fish" type="Area2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Fish"]
-shape = SubResource("CircleShape2D_4fwm3")
+[node name="Fish" type="RigidBody2D" parent="."]
+collision_mask = 4
+gravity_scale = 0.0
+lock_rotation = true
 
 [node name="Sprite2D" type="Sprite2D" parent="Fish"]
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("3_uru0g")
 
-[connection signal="body_entered" from="Fish" to="." method="_on_area_2d_body_entered"]
-[connection signal="body_exited" from="Fish" to="." method="_on_area_2d_body_exited"]
+[node name="Fish" type="Area2D" parent="Fish"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Fish/Fish"]
+shape = SubResource("CircleShape2D_4fwm3")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Fish"]
+position = Vector2(0.5, 0)
+shape = SubResource("RectangleShape2D_6xl0e")
+
+[connection signal="body_entered" from="Fish/Fish" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Fish/Fish" to="." method="_on_area_2d_body_exited"]
