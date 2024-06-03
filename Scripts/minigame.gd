@@ -13,17 +13,18 @@ var random = RandomNumberGenerator.new()
 var fish_rapidity = 100
 var fishes = ["res://Assets/fish1.png","res://Assets/fish2.png","res://Assets/fish3.png"]
 var difficulties = [100,200,400]
+var fishChoice
 
 # PICK RANDOM FISH
 func _ready():
-	var fishChoice = randi_range(0,2)
+	fishChoice = randi_range(0,2)
 	fish.get_node("Sprite2D").texture = load(fishes[fishChoice])
 	fish_rapidity = difficulties[fishChoice]
 
 func _process(_delta):
 	if Input.is_action_pressed("up"):
 		reelBar.apply_central_force(Vector2(0,-300))
-	elif reelBar.linear_velocity == Vector2.ZERO:
+	elif reelBar.linear_velocity == Vector2.ZERO and !Input.is_action_pressed("up"):
 		reelBar.apply_central_force(Vector2(0,300))
 	
 	if capturing:

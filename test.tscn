@@ -272,6 +272,8 @@ position_smoothing_enabled = true
 
 [node name="PointLight2D" type="PointLight2D" parent="Player"]
 color = Color(1, 0.709804, 0, 1)
+shadow_enabled = true
+shadow_filter = 1
 texture = ExtResource("2_h2ljr")
 texture_scale = 0.2
 

@@ -7,6 +7,8 @@ var force
 var in_water = false
 var fish_caught = false
 var minigame_loaded = false
+var minigame_finished = false
+var minigame_scene
 
 var goal_number = randi_range(0, 1500)
 var guessed_number
@@ -34,13 +36,18 @@ func _process(_delta):
 		if !fish_caught:
 			catching_fish()
 		elif minigame_loaded == false:
+			minigame_scene = load("res://Scenes/minigame.tscn")
 			minigame_loaded = true
-			var scene = load("res://Scenes/minigame.tscn")
-			instance = scene.instantiate()
+			instance = minigame_scene.instantiate()
 			add_child(instance)
 			print('minigame loaded')
 		freeze = FREEZE_MODE_KINEMATIC
-			
+	
+	if minigame_loaded:
+		if instance.caught or instance.escaped:
+			minigame_finished = true
+	
+	
 
 		
 			
