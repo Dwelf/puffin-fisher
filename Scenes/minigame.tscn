@@ -58,7 +58,7 @@ value = 300.0
 show_percentage = false
 
 [node name="ReelBar" type="RigidBody2D" parent="."]
-gravity_scale = 0.2
+gravity_scale = 0.15
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ReelBar"]
 position = Vector2(0, 9)
