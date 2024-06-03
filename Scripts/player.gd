@@ -91,11 +91,12 @@ func _physics_process(_delta):
 		if bobberInstance.minigame_finished:
 			if bobberInstance.instance.caught:
 				captured_fish.append(bobberInstance.instance.fishChoice)
+				fish_particle.texture = load(fishes[captured_fish[len(captured_fish)-1]])
+				fish_particle.emitting = true
 			remove_child(bobberInstance)
 			waiting = false
 			released = false
-			fish_particle.texture = load(fishes[captured_fish[len(captured_fish)-1]])
-			fish_particle.emitting = true
+			
 			print(captured_fish)
 	
 			
