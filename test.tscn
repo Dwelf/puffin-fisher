@@ -1,6 +1,7 @@
 [gd_scene load_steps=30 format=3 uid="uid://bpelb032546rt"]
 
 [ext_resource type="PackedScene" uid="uid://d21f4g8oo560p" path="res://Scenes/player.tscn" id="1_bpo2r"]
+[ext_resource type="Texture2D" uid="uid://bfnn8a3ne1jnx" path="res://Assets/light.png" id="2_h2ljr"]
 [ext_resource type="Texture2D" uid="uid://j5x4iwfrr7dt" path="res://Assets/grass background.png" id="3_k8w8k"]
 [ext_resource type="PackedScene" uid="uid://cgikeq0l85psv" path="res://Scenes/still_water.tscn" id="4_lg1td"]
 [ext_resource type="PackedScene" uid="uid://b7ebxt0dmckml" path="res://Scenes/water.tscn" id="4_x5l8u"]
@@ -8,7 +9,6 @@
 [ext_resource type="Texture2D" uid="uid://dkvedmu4uh0b6" path="res://Assets/Cliffs.png" id="6_fbhsm"]
 [ext_resource type="PackedScene" uid="uid://dhmungkuyi12c" path="res://Scenes/house.tscn" id="8_nnyru"]
 [ext_resource type="Script" path="res://Scripts/day_night_cycle.gd" id="8_rkj7q"]
-[ext_resource type="Texture2D" uid="uid://53ud3he8enlj" path="res://Assets/daynightcycle-gradient-texture.tres" id="9_2nduj"]
 [ext_resource type="Texture2D" uid="uid://37v5kq3iwjqm" path="res://Assets/foliage1.png" id="10_5f5wp"]
 [ext_resource type="Texture2D" uid="uid://dlynxo8mco0oe" path="res://Assets/foliage2.png" id="11_cx3eo"]
 [ext_resource type="Texture2D" uid="uid://dchlo3oedcfup" path="res://Assets/foliage3.png" id="12_c3t1g"]
@@ -270,6 +270,11 @@ y_sort_enabled = true
 zoom = Vector2(4, 4)
 position_smoothing_enabled = true
 
+[node name="PointLight2D" type="PointLight2D" parent="Player"]
+color = Color(1, 0.709804, 0, 1)
+texture = ExtResource("2_h2ljr")
+texture_scale = 0.2
+
 [node name="House" parent="." instance=ExtResource("8_nnyru")]
 z_index = 8
 y_sort_enabled = true
@@ -294,9 +299,9 @@ tile_set = SubResource("TileSet_ek0qh")
 format = 2
 layer_0/tile_data = PackedInt32Array(196604, 65540, 2, 196605, 65540, 2, 196606, 65540, 2, 196607, 65540, 2, 131072, 65540, 2, 131073, 65540, 2, 131074, 65540, 2, 131075, 131076, 2, 65540, 131076, 2, 5, 131076, 2, -65531, 131076, 1, -131067, 131076, 1, -196602, 65540, 2, -196603, 327684, 0, -196601, 65540, 2, -196600, 131076, 2, -262136, 131076, 0, -262137, 65540, 0, -327674, 131076, 1, -393210, 131076, 1, -458746, 131076, 0, -458747, 65540, 0, -458748, 65540, 0, -458749, 65540, 0, -458750, 65540, 0, -262138, 262148, 3, 4, 327684, 0, -458751, 4, 0, -393216, 4, 0, -393215, 327684, 3, -262145, 65540, 0, -327680, 327684, 3, -262146, 65540, 0, -262147, 65540, 0, -327684, 131076, 1, -393220, 131076, 0, -458757, 131076, 0, -524294, 131076, 1, -589830, 131076, 1, -655366, 131076, 0, -655367, 65540, 0, -655368, 65540, 0, -655369, 4, 0, -589833, 4, 1, -524297, 4, 1, -458762, 65540, 0, -458761, 327684, 3, -458763, 65540, 0, -458764, 65540, 0, -458765, 4, 0, -393229, 4, 1, -327693, 4, 1, -262157, 4, 1, -196622, 65540, 0, -196623, 65540, 0, -196624, 4, 0, -131088, 4, 1, -65552, 4, 1, -16, 4, 1, 65520, 4, 2, 65521, 65540, 2, 65522, 65540, 2, 65523, 65540, 2, 65524, 393220, 0, 131060, 4, 1, 196596, 4, 1, 262132, 4, 1, 327668, 4, 2, 327675, 131076, 2, 262139, 131076, 1, 196603, 327684, 0, 327669, 65540, 2, 327670, 65540, 2, 327671, 65540, 2, 327672, 65540, 2, 327673, 65540, 2, 327674, 65540, 2, -262148, 262148, 3, -393221, 262148, 3, -458758, 262148, 3, -196621, 327684, 3, 65539, 327684, 0)
 
-[node name="CanvasModulate" type="CanvasModulate" parent="."]
+[node name="DayNightCycle" type="CanvasModulate" parent="."]
+color = Color(0.384314, 0.372549, 0.364706, 1)
 script = ExtResource("8_rkj7q")
-gradient = ExtResource("9_2nduj")
 
 [node name="foliage" type="TileMap" parent="."]
 z_index = 4
@@ -311,7 +316,6 @@ layer_0/tile_data = PackedInt32Array(393217, 0, 65536, 196616, 0, 65536, -196594
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("14_vvoff")
-autoplay = true
 
 [node name="waters" type="Node2D" parent="."]
 

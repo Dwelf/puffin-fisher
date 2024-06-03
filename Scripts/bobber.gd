@@ -31,7 +31,7 @@ func throw(power, direction):
 # After 1 second freeze the bobber in place imitating it hitting water
 func _process(_delta):
 	if timer.is_stopped():
-		if fish_caught == false:
+		if !fish_caught:
 			catching_fish()
 		elif minigame_loaded == false:
 			minigame_loaded = true
@@ -40,6 +40,10 @@ func _process(_delta):
 			add_child(instance)
 			print('minigame loaded')
 		freeze = FREEZE_MODE_KINEMATIC
+			
+
+		
+			
 		
 		
 
