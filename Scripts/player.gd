@@ -42,10 +42,19 @@ func _physics_process(_delta):
 		power_bar.visible = true
 		power_bar.cast()
 	elif waiting and Input.is_action_just_pressed("cast"): #stop fishing if cast pressed while waiting for fish to bite
-		waiting = false
-		released = false
-		power_bar.reset_cast()
-		remove_child(bobberInstance)
+		if bobberInstance != null:
+			if bobberInstance.fish_on_line:
+				bobberInstance.fish_caught = true
+			else:
+				waiting = false
+				released = false
+				power_bar.reset_cast()
+				remove_child(bobberInstance)
+		else:
+			waiting = false
+			released = false
+			power_bar.reset_cast()
+			remove_child(bobberInstance)
 	
 
 	if (casting and Input.is_action_just_released("cast")) or power_bar.finished: #if power bar state ended:

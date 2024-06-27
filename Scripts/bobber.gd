@@ -2,13 +2,17 @@ extends RigidBody2D
 
 @onready var timer = $Timer
 @onready var waterCheck = $WaterCheck
+@onready var fish_bite_timer = $FishBiteTimer
+@onready var fish_bite_particles = $FishBiteParticles
 
 var force
 var in_water = false
+var fish_on_line = false
 var fish_caught = false
 var minigame_loaded = false
 var minigame_finished = false
 var minigame_scene
+var time = 0
 
 var goal_number = randi_range(0, 1500)
 var guessed_number
@@ -32,6 +36,7 @@ func throw(power, direction):
 	
 # After 1 second freeze the bobber in place imitating it hitting water
 func _process(_delta):
+	time = (time + 0.1)
 	if timer.is_stopped():
 		if !fish_caught:
 			catching_fish()
@@ -65,8 +70,19 @@ func _on_water_check_area_exited(area):
 		in_water = false
 
 func catching_fish():
-	guessed_number = randi_range(0, 1500)
+	if not(fish_on_line):
+		guessed_number = randi_range(0, 1500)
 	
-	if guessed_number == goal_number or true:
-		print('fish on line')
-		fish_caught = true
+		if (guessed_number == goal_number or true):
+			print('fish on line')
+			fish_on_line = true
+			fish_bite_timer.start()
+			fish_bite_particles.emitting = true
+	elif fish_bite_timer.is_stopped():
+		fish_on_line = false
+		fish_bite_particles.emitting = false
+	else:
+		
+		position.y += sin(time)/ 3
+		
+	
